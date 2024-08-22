@@ -8,7 +8,11 @@ import com.sedmelluq.discord.lavaplayer.source.getyarn.GetyarnAudioSourceManager
 import com.sedmelluq.discord.lavaplayer.source.http.HttpAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.local.LocalAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.nico.NicoAudioSourceManager;
+import com.sedmelluq.discord.lavaplayer.source.odysee.OdyseeAudioSourceManager;
+import com.sedmelluq.discord.lavaplayer.source.reddit.RedditAudioSourceManager;
+import com.sedmelluq.discord.lavaplayer.source.rumble.RumbleAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.soundcloud.SoundCloudAudioSourceManager;
+import com.sedmelluq.discord.lavaplayer.source.tiktok.TiktokAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.twitch.TwitchStreamAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.vimeo.VimeoAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.yamusic.YandexMusicAudioSourceManager;
@@ -37,13 +41,17 @@ public class AudioSourceManagers {
     public static void registerRemoteSources(AudioPlayerManager playerManager, MediaContainerRegistry containerRegistry) {
         playerManager.registerSourceManager(new YoutubeAudioSourceManager(true, null, null));
         playerManager.registerSourceManager(new YandexMusicAudioSourceManager(true));
-        playerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault());
+        playerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault(true));
         playerManager.registerSourceManager(new BandcampAudioSourceManager());
         playerManager.registerSourceManager(new VimeoAudioSourceManager());
         playerManager.registerSourceManager(new TwitchStreamAudioSourceManager());
         playerManager.registerSourceManager(new BeamAudioSourceManager());
         playerManager.registerSourceManager(new GetyarnAudioSourceManager());
         playerManager.registerSourceManager(new NicoAudioSourceManager());
+        playerManager.registerSourceManager(new RedditAudioSourceManager());
+        playerManager.registerSourceManager(new RumbleAudioSourceManager());
+        playerManager.registerSourceManager(new OdyseeAudioSourceManager());
+        playerManager.registerSourceManager(new TiktokAudioSourceManager());
         playerManager.registerSourceManager(new HttpAudioSourceManager(containerRegistry));
     }
 
@@ -77,7 +85,7 @@ public class AudioSourceManagers {
             playerManager.registerSourceManager(new YandexMusicAudioSourceManager(true));
         }
         if (!excluded.contains(SoundCloudAudioSourceManager.class)) {
-            playerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault());
+            playerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault(true));
         }
         if (!excluded.contains(BandcampAudioSourceManager.class)) {
             playerManager.registerSourceManager(new BandcampAudioSourceManager());
@@ -96,6 +104,18 @@ public class AudioSourceManagers {
         }
         if (!excluded.contains(NicoAudioSourceManager.class)) {
             playerManager.registerSourceManager(new NicoAudioSourceManager());
+        }
+        if (!excluded.contains(RedditAudioSourceManager.class)) {
+            playerManager.registerSourceManager(new RedditAudioSourceManager());
+        }
+        if (!excluded.contains(RumbleAudioSourceManager.class)) {
+            playerManager.registerSourceManager(new RumbleAudioSourceManager());
+        }
+        if (!excluded.contains(OdyseeAudioSourceManager.class)) {
+            playerManager.registerSourceManager(new OdyseeAudioSourceManager());
+        }
+        if (!excluded.contains(TiktokAudioSourceManager.class)) {
+            playerManager.registerSourceManager(new TiktokAudioSourceManager());
         }
         if (!excluded.contains(HttpAudioSourceManager.class)) {
             playerManager.registerSourceManager(new HttpAudioSourceManager(containerRegistry));

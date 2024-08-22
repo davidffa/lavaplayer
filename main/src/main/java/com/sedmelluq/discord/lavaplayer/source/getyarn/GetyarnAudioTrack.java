@@ -42,4 +42,9 @@ public class GetyarnAudioTrack extends DelegatedAudioTrack {
     protected AudioTrack makeShallowClone() {
         return new GetyarnAudioTrack(trackInfo, sourceManager);
     }
+
+    @Override
+    public GetyarnAudioSourceManager getSourceManager() {
+        return sourceManager;
+    }
 }
