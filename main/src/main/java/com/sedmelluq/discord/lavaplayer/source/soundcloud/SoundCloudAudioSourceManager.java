@@ -100,6 +100,21 @@ public class SoundCloudAudioSourceManager implements AudioSourceManager, HttpCon
         SoundCloudDataReader dataReader,
         SoundCloudDataLoader dataLoader,
         SoundCloudFormatHandler formatHandler,
+        SoundCloudPlaylistLoader playlistLoader
+    ) {
+        this(allowSearch, dataReader, dataLoader, formatHandler, playlistLoader, false);
+    }
+
+    /**
+     * Create an instance.
+     *
+     * @param allowSearch Whether to allow search queries as identifiers
+     */
+    public SoundCloudAudioSourceManager(
+        boolean allowSearch,
+        SoundCloudDataReader dataReader,
+        SoundCloudDataLoader dataLoader,
+        SoundCloudFormatHandler formatHandler,
         SoundCloudPlaylistLoader playlistLoader,
         boolean filterOutPreviewTracks
     ) {
@@ -306,6 +321,10 @@ public class SoundCloudAudioSourceManager implements AudioSourceManager, HttpCon
             }
         }
 
+        if (tracks.isEmpty()) {
+            return AudioReference.NO_TRACK;
+        }
+
         return new BasicAudioPlaylist("Liked by " + userInfo.name, tracks, null, false);
     }
 
@@ -378,6 +397,10 @@ public class SoundCloudAudioSourceManager implements AudioSourceManager, HttpCon
                     tracks.add(loadFromTrackData(item));
                 }
             }
+        }
+
+        if (tracks.isEmpty()) {
+            return AudioReference.NO_TRACK;
         }
 
         return new BasicAudioPlaylist("Search results for: " + query, tracks, null, true);
